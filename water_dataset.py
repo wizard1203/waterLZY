@@ -18,10 +18,10 @@ def read_sample(sample_file_path):
         # label = int(float(lines[0].split(',')[0].strip()))
         reallabel = int(float(lines[0].split(',')[0].strip()))
         label = opt.labels_dict.index(reallabel)
-        datas = list()
-        for line in lines[1:] :
-            line = [float(item) for item in line.split(',')]
-            datas.append(line)
+        datas = [(float(item)) for item in lines[0].split(',')[1:-1].strip()]
+        # for line in lines[1:] :
+        #     line = [float(item) for item in line.split(',')]
+        #     datas.append(line)
     f.close()        
     return label, datas
 
