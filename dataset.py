@@ -23,7 +23,7 @@ import os
 import logging
 
 class TrainDataset(Dataset):
-    def __init__(self, config, split='train'):
+    def __init__(self, config, split='trainData'):
         self.config = config
         self.db = WaterDataset(config.data_dir, split=split)
 
@@ -45,7 +45,7 @@ class TrainDataset(Dataset):
 
 
 class TestDataset(Dataset):
-    def __init__(self, config, split='test'):
+    def __init__(self, config, split='testData'):
         self.config = config
         self.db = WaterDataset(config.data_dir, split=split)
 
