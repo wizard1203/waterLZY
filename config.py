@@ -110,11 +110,11 @@ class Config:
             os.mkdir('log')
 
         if opt.arch == 'waterdsnetf':
-            self.labels_dict = self.labels_dict_34
+            self.labels_dict = self.labels_dict_12
         elif opt.arch == 'waterdsnetf_in4_out58':
             self.labels_dict = self.labels_dict_58
         elif opt.arch == 'waterdsnetf_self_define':
-            self.labels_dict = self.labels_dict_34
+            self.labels_dict = self.labels_dict_12
         elif opt.arch == 'watercnndsnetf_in4_out58':
             self.labels_dict = self.labels_dict_58
         elif opt.arch == 'waternetsmallfl':
