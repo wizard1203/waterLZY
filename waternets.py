@@ -287,7 +287,7 @@ class WaterDenseNet(nn.Module):
 class WaterDenseNetFinal(nn.Module):
     
     def __init__(self, growth_rate=128, block_config=(8, 16, 16, 12),
-                 num_init_features=1536, bn_size=4, drop_rate=0.5, num_classes=34):
+                 num_init_features=639, bn_size=4, drop_rate=0.5, num_classes=34):
         
         super(WaterDenseNetFinal, self).__init__()
         
@@ -318,7 +318,7 @@ class WaterDenseNetFinal(nn.Module):
         self.classifier = nn.Linear(num_features, num_classes)
     
     def forward(self, x):
-        x = x.view(-1, 1536)
+        x = x.view(-1, 639)
         features = self.features(x)
         out = F.relu(features, inplace=True)
         # out = F.avg_pool2d(out, kernel_size=7).view(features.size(0), -1)
