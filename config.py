@@ -103,9 +103,9 @@ class Config:
         pprint(self._state_dict())
         print('==========end============')
         if opt.customize:
-            logging_name = 'log' + '_self_' + opt.arch + '_'+ opt.optim + opt.kind + '.txt' 
+            logging_name = 'log' + '_self_' + opt.arch + '_'+ opt.optim + opt.kind + '_lr_' + str(self.lr) + '.txt' 
         else:
-            logging_name = 'log' + '_default_' + opt.arch  + '_' + opt.optim + opt.kind + '.txt'
+            logging_name = 'log' + '_default_' + opt.arch  + '_' + opt.optim + opt.kind + '_lr_' + str(self.lr) + '.txt'
         if not os.path.exists('log'):
             os.mkdir('log')
 
