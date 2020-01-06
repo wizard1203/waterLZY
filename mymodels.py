@@ -13,16 +13,16 @@ class MyModels:
     # waterdsnetf_self_define = waternets.WaterDenseNet_self_define(growth_rate=opt.growth_rate, num_init_features=opt.num_init_features)
 
     def waterdsnetf_self_define(opt):
-        return waternets.WaterDenseNet_self_define(growth_rate=opt.growth_rate, num_init_features=opt.num_init_features)
+        return waternets.WaterDenseNet_self_define(growth_rate=opt.growth_rate, num_init_features=opt.num_init_features,num_classes=len(opt.labels_dict))
 
     def waterdsnetf(opt):
-        return waternets.WaterDenseNetFinal()
+        return waternets.WaterDenseNetFinal(num_classes=len(opt.labels_dict))
 
     def waterdsnetf_in4_out58(opt):
-        return waternets.WaterDenseNet_in4_out58(growth_rate=opt.growth_rate, num_init_features=opt.num_init_features, activation=opt.activation)
+        return waternets.WaterDenseNet_in4_out58(growth_rate=opt.growth_rate, num_init_features=opt.num_init_features, activation=opt.activation,num_classes=len(opt.labels_dict))
 
     def watercnndsnetf_in4_out58(opt):
-        return waternets.WaterCNNDenseNet_in4_out58(growth_rate=opt.growth_rate, num_init_features=opt.num_init_features)
+        return waternets.WaterCNNDenseNet_in4_out58(growth_rate=opt.growth_rate, num_init_features=opt.num_init_features,num_classes=len(opt.labels_dict))
 
     def waternetsmallfl(opt):
         return waternets.WaterNetSmallFL()
