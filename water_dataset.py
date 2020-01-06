@@ -16,9 +16,17 @@ def read_sample(sample_file_path):
     with open(sample_file_path, 'r') as f:
         lines = f.readlines()
         # label = int(float(lines[0].split(',')[0].strip()))
-        reallabel = int(float(lines[0].split(',')[0].strip()))
-        label = opt.labels_dict.index(reallabel)
-        datas = [(float(item)) for item in lines[0].split(',')[1:-1]]
+        if opt.multi_label > 1:
+            reallabel = [int(float(item.strip())) for item in lines[0].split(',')[0:len(opt.multi_label)]]
+            label = [0]*len(opt.labels_dict) 
+            for single_label in reallabel:
+                if label != 0:
+                    label[opt.labels_dict.index(single_label)] = 1
+            datas = [(float(item)) for item in lines[0].split(',')[len(opt.multi_label):-1]]
+        else:
+            reallabel = int(float(lines[0].split(',')[0].strip()))
+            label = opt.labels_dict.index(reallabel)
+            datas = [(float(item)) for item in lines[0].split(',')[1:-1]]
         # print(lines[0])
         #print(len(datas))
         #print("===========\n")
@@ -27,7 +35,7 @@ def read_sample(sample_file_path):
 # for line in lines[1:] :
         #     line = [float(item) for item in line.split(',')]
         #     datas.append(line)
-    f.close()        
+    f.close()
     return label, datas
 
 

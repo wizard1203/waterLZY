@@ -215,7 +215,7 @@ def main_worker():
         #     trainer.load(best_path, load_optimizer=False)
         #     trainer.scale_lr()
             
-    validate(test_dataloader, model, criterion, opt.out, seeout=True)
+    validate(test_dataloader, model, criterion, opt.predict_name, seeout=True)
     print("=====complete training & output predict =======")
     # trainer.save(save_optimizer=True, better=False, save_path=opt.save_path)
 
@@ -248,42 +248,90 @@ def train(train_loader, trainer, epoch):
         trainloss, output = trainer.train_step(label, datas)
         # print('==========output=======[{}]===='.format(output))
         # measure accuracy and record loss
-        acc, pred5, max5out= accuracy(output, label, topk=(1, 5))
-        acc1 = acc[0]
-        acc5 = acc[1]
-        losses.update(trainloss.item(), datas.size(0))
-        top1.update(acc1[0], datas.size(0))
-        top5.update(acc5[0], datas.size(0))
-        
-        if lossesnum > losses.val:
-            lossesnum = losses.val
-            print('====iter *{}==== * * *   losses.val :{} Update   ========\n'.format(ii, lossesnum))
-            # best_path = trainer.save(better=True)
-            # print("====epoch[{}]--- iter[{}] ** save params *******===".format(epoch, ii))
+        if opt.multi_label > 1:
+            pass
+            # acc, pred5, max5out= accuracy(output, label, topk=(1, 5))
+            # acc1 = acc[0]
+            # acc5 = acc[1]
+            # losses.update(trainloss.item(), datas.size(0))
+            # top1.update(acc1[0], datas.size(0))
+            # top5.update(acc5[0], datas.size(0))
             
-        # if best_acc1 < top1.val:
-        #     best_acc1 = top1.val
-        #     print('===== * * *   best_acc1 :{} Update   ========\n'.format(best_acc1))
-        #     best_path = trainer.save(better=True)
-            
-        # measure elapsed time
-        batch_time.update(time.time() - end)
-        end = time.time()
-    
-        if (ii + 1) % opt.plot_every == 0:
-            print('Epoch: [{0}][{1}/{2}]\t'
-                  'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
-                  'Data {data_time.val:.3f} ({data_time.avg:.3f})\t'
-                  'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
-                  'Acc@1 {top1.val:.3f} ({top1.avg:.3f})\t'
-                  'Acc@5 {top5.val:.3f} ({top5.avg:.3f})'.format(
-                   epoch, ii, len(train_loader), batch_time=batch_time,
-                   data_time=data_time, loss=losses, top1=top1, top5=top5))
-            logging.info(' train-----* ===Epoch: [{0}][{1}/{2}]\t Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f} Loss {loss.val:.4f}'
-              .format(epoch, ii, len(train_loader), top1=top1, top5=top5, loss=losses))
+            # if lossesnum > losses.val:
+            #     lossesnum = losses.val
+            #     print('====iter *{}==== * * *   losses.val :{} Update   ========\n'.format(ii, lossesnum))
+            #     # best_path = trainer.save(better=True)
+            #     # print("====epoch[{}]--- iter[{}] ** save params *******===".format(epoch, ii))
+                
+            # # if best_acc1 < top1.val:
+            # #     best_acc1 = top1.val
+            # #     print('===== * * *   best_acc1 :{} Update   ========\n'.format(best_acc1))
+            # #     best_path = trainer.save(better=True)
+                
+            # # measure elapsed time
+            # batch_time.update(time.time() - end)
+            # end = time.time()
         
-    
+            # if (ii + 1) % opt.plot_every == 0:
+            #     print('Epoch: [{0}][{1}/{2}]\t'
+            #           'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
+            #           'Data {data_time.val:.3f} ({data_time.avg:.3f})\t'
+            #           'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
+            #           'Acc@1 {top1.val:.3f} ({top1.avg:.3f})\t'
+            #           'Acc@5 {top5.val:.3f} ({top5.avg:.3f})'.format(
+            #            epoch, ii, len(train_loader), batch_time=batch_time,
+            #            data_time=data_time, loss=losses, top1=top1, top5=top5))
+            #     logging.info(' train-----* ===Epoch: [{0}][{1}/{2}]\t Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f} Loss {loss.val:.4f}'
+            #       .format(epoch, ii, len(train_loader), top1=top1, top5=top5, loss=losses))
+        else:
+            acc, pred5, max5out= accuracy(output, label, topk=(1, 5))
+            acc1 = acc[0]
+            acc5 = acc[1]
+            losses.update(trainloss.item(), datas.size(0))
+            top1.update(acc1[0], datas.size(0))
+            top5.update(acc5[0], datas.size(0))
+            
+            if lossesnum > losses.val:
+                lossesnum = losses.val
+                print('====iter *{}==== * * *   losses.val :{} Update   ========\n'.format(ii, lossesnum))
+                # best_path = trainer.save(better=True)
+                # print("====epoch[{}]--- iter[{}] ** save params *******===".format(epoch, ii))
+                
+            # if best_acc1 < top1.val:
+            #     best_acc1 = top1.val
+            #     print('===== * * *   best_acc1 :{} Update   ========\n'.format(best_acc1))
+            #     best_path = trainer.save(better=True)
+                
+            # measure elapsed time
+            batch_time.update(time.time() - end)
+            end = time.time()
+        
+            if (ii + 1) % opt.plot_every == 0:
+                print('Epoch: [{0}][{1}/{2}]\t'
+                      'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
+                      'Data {data_time.val:.3f} ({data_time.avg:.3f})\t'
+                      'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
+                      'Acc@1 {top1.val:.3f} ({top1.avg:.3f})\t'
+                      'Acc@5 {top5.val:.3f} ({top5.avg:.3f})'.format(
+                       epoch, ii, len(train_loader), batch_time=batch_time,
+                       data_time=data_time, loss=losses, top1=top1, top5=top5))
+                logging.info(' train-----* ===Epoch: [{0}][{1}/{2}]\t Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f} Loss {loss.val:.4f}'
+                  .format(epoch, ii, len(train_loader), top1=top1, top5=top5, loss=losses))
 
+def accuracu_multilabel(output, target):
+    with torch.no_grad():
+        maxk = max(topk)
+        batch_size = target.size(0)
+        
+        max5out, pred = output.topk(maxk, 1, True, True)
+        pred2 = pred.t()
+        correct = pred2.eq(target.view(1, -1).expand_as(pred2))
+
+        res = []
+        for k in topk:
+            correct_k = correct[:k].view(-1).float().sum(0, keepdim=True)
+            res.append(correct_k.mul_(100.0 / batch_size))
+        return res, pred, max5out
 
 
 def accuracy(output, target, topk=(1,)):
@@ -301,9 +349,7 @@ def accuracy(output, target, topk=(1,)):
             correct_k = correct[:k].view(-1).float().sum(0, keepdim=True)
             res.append(correct_k.mul_(100.0 / batch_size))
         return res, pred, max5out
-    
-    
-    
+
 
 class AverageMeter(object):
     """Computes and stores the average and currentcurrent value"""

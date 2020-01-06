@@ -21,6 +21,8 @@ class Config:
     num_init_features = 1536
     num_classes = 12
 
+    multi_label = 1
+
     train_num_workers = 8
     test_num_workers = 8
 
@@ -48,8 +50,10 @@ class Config:
     # lr['waterdsnetf_in4_out58'] = 0.2
     # weight_decay['waterdsnetf_in4_out58'] = 0.00005
     # lr_decay['waterdsnetf_in4_out58'] = 0.33
-
+    logging_name = 'log'
+    predict_name = '_predict.txt'
     activation = 'relu'
+
 
     lr = 0.6
     weight_decay = 0.00005
@@ -103,9 +107,14 @@ class Config:
         pprint(self._state_dict())
         print('==========end============')
         if opt.customize:
-            logging_name = 'log' + '_self_' + opt.arch + '_'+ opt.optim + opt.kind + '_lr_' + str(self.lr) + '.txt' 
+            self.logging_name = self.logging_name + '_self_' + opt.arch + '_'+ opt.optim + opt.kind + '_lr_' + str(self.lr) 
         else:
-            logging_name = 'log' + '_default_' + opt.arch  + '_' + opt.optim + opt.kind + '_lr_' + str(self.lr) + '.txt'
+            self.logging_name = self.logging_name + '_default_' + opt.arch  + '_' + opt.optim + opt.kind + '_lr_' + str(self.lr)
+
+        if opt.multi_label > 1:
+            self.multi_label = opt.multi_label
+            self.logging_name = self.logging_name + '_multi_label_' + str(self.multi_label)
+
         if not os.path.exists('log'):
             os.mkdir('log')
 
@@ -120,7 +129,9 @@ class Config:
         elif opt.arch == 'waternetsmallfl':
             self.labels_dict = self.labels_dict_58
 
-        logging_path = os.path.join('log', logging_name) 
+        self.predict_name = self.logging_name + self.predict_name
+        self.logging_name = self.logging_name + '.log'
+        logging_path = os.path.join('log', self.logging_name)
     
         logging.basicConfig(level=logging.DEBUG,
                         filename=logging_path,
