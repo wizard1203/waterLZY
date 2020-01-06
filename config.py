@@ -1,43 +1,10 @@
 from pprint import pprint
 from pprint import pformat
-import os
-import logging
-
-class Config:
-    # data
-    data_dir = ' '
-    out_pred_dir = '/home/zhtang/waterLZY/txt/'
-    out = 'predict'
 
     nets = ['waternetsmallfl', 'watercnndsnetf_in4_out58', 'waterdsnetf_in4_out58', 'waterdsnetf_self_define']
 
     # pretrained
-    pretrained = None
 
-    # architecture of network
-    customize = True
-    arch = 'waternet'
-    growth_rate = 128
-    num_init_features = 1536
-    num_classes = 12
-
-    train_num_workers = 8
-    test_num_workers = 8
-
-    # optimizers
-    optim = 'SGD'
-    use_adam = False
-
-    # param for optimizer
-    # lr = {}
-    # weight_decay = {}
-    # lr_decay = {}
-
-    # lr['waterdsnetf_self_define'] = 0.6
-    # weight_decay['waterdsnetf_self_define'] = 0.00005
-    # lr_decay['waterdsnetf_self_define'] = 0.33
-
-    # lr['waternetsmallfl'] = 0.01
     # weight_decay['waternetsmallfl'] = 0.00005
     # lr_decay['waternetsmallfl'] = 0.33
 
@@ -72,11 +39,6 @@ class Config:
     # training
     epoch = 120
 
-    # if eval
-    evaluate = False
-
-    test_num = 10000
-    # model
     load_path = None
     save_path = '~/water/modelparams'
 
