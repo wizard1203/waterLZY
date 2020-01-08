@@ -51,7 +51,7 @@ def val_out(**kwargs):
 
     opt._parse(kwargs)
     print("===========validate & predict mode ===============")
-    criterion = nn.CrossEntropyLoss().cuda()
+    
     opt.data_dir = kwargs['data_dir']
     testset = TestDataset(opt)
     test_dataloader = data_.DataLoader(testset,
@@ -60,14 +60,18 @@ def val_out(**kwargs):
                                        shuffle=False, \
                                        pin_memory=True
                                        )
-    
+
     model = mymodels.__dict__[kwargs['arch']]()
-    
+
     trainer = WaterNetTrainer(model).cuda()
     trainer.load(kwargs['load_path'], parse_opt=True)
     print('load pretrained model from %s' % kwargs['loadpath'])
-    acc1, acc5 = validate(test_dataloader, model, criterion, True)
-    
+    if opt.multi_label > 1:
+        criterion = nn.BCELoss().cuda()
+    else:
+        criterion = nn.CrossEntropyLoss().cuda()
+    validate(test_dataloader, model, criterion, True)
+
 
 
 def validate(val_loader, model, criterion, outfile='predict', seeout = False):
@@ -75,7 +79,7 @@ def validate(val_loader, model, criterion, outfile='predict', seeout = False):
     losses = AverageMeter()
     top1 = AverageMeter()
     top5 = AverageMeter()
-
+    multi_label_acc = AverageMeter()
     # switch to evaluate mode
     model.eval()
 
@@ -95,32 +99,68 @@ def validate(val_loader, model, criterion, outfile='predict', seeout = False):
             output = model(datas)
             loss = criterion(output, target)
             # measure accuracy and record loss
-            acc, pred5, max5out = accuracy(output, target, topk=(1, 5))
-            if seeout:
-                writepred = pred5.tolist()
-                max5out = max5out.tolist()
-                for i, item in enumerate(writepred) :
-                    outf.writelines(str(item).strip('[').strip(']') + ',' + str(max5out[i]).strip('[').strip(']') +
-                                    ',' + str(target.tolist()[i]) + '\r\n')
-                    
-            acc1 = acc[0]
-            acc5 = acc[1]
-            losses.update(loss.item(), datas.size(0))
-            top1.update(acc1[0], datas.size(0))
-            top5.update(acc5[0], datas.size(0))
+            if opt.multi_label > 1:
+                acc, output_list, batch_pred, batch_target, origin_target = accuracu_multilabel(output, label)
+                if seeout:
+                    writepred = pred5.tolist()
+                    max5out = max5out.tolist()
+                    for i in len(output_list) :
+                        outf.writelines("output:" + str(output_list[i]).strip('[').strip(']') + 
+                                        ',' + "pred:" + str(batch_pred[i]).strip('[').strip(']') + 
+                                        ',' + "target_encode:" + str(batch_target[i]).strip('[').strip(']') + 
+                                        ',' + "target_origin:" + str(origin_target[i]).strip('[').strip(']') + 
+                                        ',' + "acc:" + str(acc) + '\r\n')
+                multi_label_acc.update(acc, 1)
+                losses.update(trainloss.item(), datas.size(0))
+                if lossesnum > losses.val:
+                    lossesnum = losses.val
+                    print('====iter *{}==== * * *   losses.val :{} Update   ========\n'.format(ii, lossesnum))
+                    # best_path = trainer.save(better=True)
+                    # print("====epoch[{}]--- iter[{}] ** save params *******===".format(epoch, ii))
 
-            # measure elapsed time
-            batch_time.update(time.time() - end)
-            end = time.time()
+                # # if best_acc1 < top1.val:
+                # #     best_acc1 = top1.val
+                # #     print('===== * * *   best_acc1 :{} Update   ========\n'.format(best_acc1))
+                # #     best_path = trainer.save(better=True)
 
-            if i % opt.plot_every == 0:
-                print('Test: [{0}/{1}]\t'
-                      'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
-                      'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
-                      'Acc@1 {top1.val:.3f} ({top1.avg:.3f})\t'
-                      'Acc@5 {top5.val:.3f} ({top5.avg:.3f})'.format(
-                       i, len(val_loader), batch_time=batch_time, loss=losses,
-                       top1=top1, top5=top5))
+                # measure elapsed time
+                batch_time.update(time.time() - end)
+                end = time.time()
+
+                if (ii + 1) % opt.plot_every == 0:
+                    print('Test: [{0}][{1}/{2}]\t'
+                          'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
+                          'Data {data_time.val:.3f} ({data_time.avg:.3f})\t'
+                          'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
+                          'Acc@hamming {multi_label_acc.val:.3f} ({multi_label_acc.avg:.3f})\t'.format(
+                           epoch, ii, len(train_loader), batch_time=batch_time,
+                           data_time=data_time, loss=losses, multi_label_acc=multi_label_acc))
+            else:
+                acc, pred5, max5out = accuracy(output, target, topk=(1, 5))
+                if seeout:
+                    writepred = pred5.tolist()
+                    max5out = max5out.tolist()
+                    for i, item in enumerate(writepred) :
+                        outf.writelines(str(item).strip('[').strip(']') + ',' + str(max5out[i]).strip('[').strip(']') +
+                                        ',' + str(target.tolist()[i]) + '\r\n')
+                acc1 = acc[0]
+                acc5 = acc[1]
+                losses.update(loss.item(), datas.size(0))
+                top1.update(acc1[0], datas.size(0))
+                top5.update(acc5[0], datas.size(0))
+
+                # measure elapsed time
+                batch_time.update(time.time() - end)
+                end = time.time()
+
+                if i % opt.plot_every == 0:
+                    print('Test: [{0}/{1}]\t'
+                          'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
+                          'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
+                          'Acc@1 {top1.val:.3f} ({top1.avg:.3f})\t'
+                          'Acc@5 {top5.val:.3f} ({top5.avg:.3f})'.format(
+                           i, len(val_loader), batch_time=batch_time, loss=losses,
+                           top1=top1, top5=top5))
 
         print(' * Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f}'
               .format(top1=top1, top5=top5))
@@ -132,7 +172,6 @@ def validate(val_loader, model, criterion, outfile='predict', seeout = False):
         outf.writelines('======user config========')
         outf.writelines(pformat(opt._state_dict()))
     outf.close()
-    return top1.avg, top5.avg
 
 
 def main_worker():
@@ -237,6 +276,7 @@ def train(train_loader, trainer, epoch):
     top1 = AverageMeter()
     top5 = AverageMeter()
 
+    multi_label_acc = AverageMeter()
     # switch to train mode
     # model.train()
     end = time.time()
@@ -249,40 +289,34 @@ def train(train_loader, trainer, epoch):
         # print('==========output=======[{}]===='.format(output))
         # measure accuracy and record loss
         if opt.multi_label > 1:
-            pass
-            # acc, pred5, max5out= accuracy(output, label, topk=(1, 5))
-            # acc1 = acc[0]
-            # acc5 = acc[1]
-            # losses.update(trainloss.item(), datas.size(0))
-            # top1.update(acc1[0], datas.size(0))
-            # top5.update(acc5[0], datas.size(0))
-            
-            # if lossesnum > losses.val:
-            #     lossesnum = losses.val
-            #     print('====iter *{}==== * * *   losses.val :{} Update   ========\n'.format(ii, lossesnum))
-            #     # best_path = trainer.save(better=True)
-            #     # print("====epoch[{}]--- iter[{}] ** save params *******===".format(epoch, ii))
-                
+            acc, output_list, batch_pred, batch_target, origin_target = accuracu_multilabel(output, label)
+            multi_label_acc.update(acc, 1)
+            losses.update(trainloss.item(), datas.size(0))
+            if lossesnum > losses.val:
+                lossesnum = losses.val
+                print('====iter *{}==== * * *   losses.val :{} Update   ========\n'.format(ii, lossesnum))
+                # best_path = trainer.save(better=True)
+                # print("====epoch[{}]--- iter[{}] ** save params *******===".format(epoch, ii))
+
             # # if best_acc1 < top1.val:
             # #     best_acc1 = top1.val
             # #     print('===== * * *   best_acc1 :{} Update   ========\n'.format(best_acc1))
             # #     best_path = trainer.save(better=True)
-                
-            # # measure elapsed time
-            # batch_time.update(time.time() - end)
-            # end = time.time()
-        
-            # if (ii + 1) % opt.plot_every == 0:
-            #     print('Epoch: [{0}][{1}/{2}]\t'
-            #           'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
-            #           'Data {data_time.val:.3f} ({data_time.avg:.3f})\t'
-            #           'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
-            #           'Acc@1 {top1.val:.3f} ({top1.avg:.3f})\t'
-            #           'Acc@5 {top5.val:.3f} ({top5.avg:.3f})'.format(
-            #            epoch, ii, len(train_loader), batch_time=batch_time,
-            #            data_time=data_time, loss=losses, top1=top1, top5=top5))
-            #     logging.info(' train-----* ===Epoch: [{0}][{1}/{2}]\t Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f} Loss {loss.val:.4f}'
-            #       .format(epoch, ii, len(train_loader), top1=top1, top5=top5, loss=losses))
+
+            # measure elapsed time
+            batch_time.update(time.time() - end)
+            end = time.time()
+
+            if (ii + 1) % opt.plot_every == 0:
+                print('Epoch: [{0}][{1}/{2}]\t'
+                      'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
+                      'Data {data_time.val:.3f} ({data_time.avg:.3f})\t'
+                      'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
+                      'Acc@hamming {multi_label_acc.val:.3f} ({multi_label_acc.avg:.3f})\t'.format(
+                       epoch, ii, len(train_loader), batch_time=batch_time,
+                       data_time=data_time, loss=losses, multi_label_acc=multi_label_acc))
+                logging.info(' train-----* ===Epoch: [{0}][{1}/{2}]\t Acc@hamming {multi_label_acc.avg:.3f} Loss {loss.val:.4f}'
+                  .format(epoch, ii, len(train_loader), multi_label_acc=multi_label_acc, loss=losses))
         else:
             acc, pred5, max5out= accuracy(output, label, topk=(1, 5))
             acc1 = acc[0]
@@ -290,22 +324,22 @@ def train(train_loader, trainer, epoch):
             losses.update(trainloss.item(), datas.size(0))
             top1.update(acc1[0], datas.size(0))
             top5.update(acc5[0], datas.size(0))
-            
+
             if lossesnum > losses.val:
                 lossesnum = losses.val
                 print('====iter *{}==== * * *   losses.val :{} Update   ========\n'.format(ii, lossesnum))
                 # best_path = trainer.save(better=True)
                 # print("====epoch[{}]--- iter[{}] ** save params *******===".format(epoch, ii))
-                
+
             # if best_acc1 < top1.val:
             #     best_acc1 = top1.val
             #     print('===== * * *   best_acc1 :{} Update   ========\n'.format(best_acc1))
             #     best_path = trainer.save(better=True)
-                
+
             # measure elapsed time
             batch_time.update(time.time() - end)
             end = time.time()
-        
+
             if (ii + 1) % opt.plot_every == 0:
                 print('Epoch: [{0}][{1}/{2}]\t'
                       'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
@@ -319,19 +353,42 @@ def train(train_loader, trainer, epoch):
                   .format(epoch, ii, len(train_loader), top1=top1, top5=top5, loss=losses))
 
 def accuracu_multilabel(output, target):
+    print("output", output)
     with torch.no_grad():
-        maxk = max(topk)
-        batch_size = target.size(0)
-        
-        max5out, pred = output.topk(maxk, 1, True, True)
-        pred2 = pred.t()
-        correct = pred2.eq(target.view(1, -1).expand_as(pred2))
+        batch_pred = []
+        batch_target = []
+        output_list = []
+        hamming_acc = 0.0
+        origin_target = []
+        for i, item_target in enumerate(target):
+            new_item_origin_target = []
+            new_item_target = [0]*len(opt.labels_dict)
+            for idx in item_target:
+                new_item_origin_target.append(idx)
+                if idx != 0:
+                    new_item_target[opt.labels_dict.index(idx)]=1
+            origin_target.append(new_item_origin_target)
+            batch_target.append(new_item_target)
 
-        res = []
-        for k in topk:
-            correct_k = correct[:k].view(-1).float().sum(0, keepdim=True)
-            res.append(correct_k.mul_(100.0 / batch_size))
-        return res, pred, max5out
+        for i, item_output in enumerate(output):
+            new_item_output = []
+            new_item_pred = [0]*len(opt.labels_dict)
+            for j, single_label_pred in enumerate(item_output):
+                new_item_output.append(single_label_pred)
+                if single_label_pred>0.5:
+                    new_item_pred[j] = 1
+                else:
+                    new_item_pred[j] = 0
+                if new_item_pred[j] == batch_target[i][j]:
+                    hamming_acc += 1.0
+            output_list.append(new_item_output)
+            batch_pred.append(new_item_pred)
+
+        hamming_acc = hamming_acc / (len(target)*len(target[0]))
+
+        acc = hamming_acc
+
+        return acc, output_list, batch_pred, batch_target, origin_target
 
 
 def accuracy(output, target, topk=(1,)):
