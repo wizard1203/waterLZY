@@ -324,7 +324,8 @@ class WaterDenseNetFinal(nn.Module):
         # out = F.avg_pool2d(out, kernel_size=7).view(features.size(0), -1)
         out = self.classifier(out)
         if opt.multi_label > 1:
-            out = nn.sigmoid(out)
+            #out = nn.sigmoid(out)
+            out = F.sigmoid(out)
         else:
             out = F.log_softmax(out, dim=1)
         return out

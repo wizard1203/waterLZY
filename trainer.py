@@ -31,12 +31,14 @@ class WaterNetTrainer(nn.Module):
         self.optimizer.zero_grad()
         pred = self.forward(datas)
         if opt.multi_label > 1:
-            loss = nn.BCELoss(pred, label)
+            loss1 = nn.BCELoss()
+            loss = loss1(pred, label)
+            loss.backward()
         else:
             loss = F.nll_loss(pred, label)
-        loss.backward()
+            loss.backward()
         self.optimizer.step()
-
+        
         return loss, pred
 
     def scale_lr(self):

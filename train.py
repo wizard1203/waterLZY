@@ -66,10 +66,10 @@ def val_out(**kwargs):
     trainer = WaterNetTrainer(model).cuda()
     trainer.load(kwargs['load_path'], parse_opt=True)
     print('load pretrained model from %s' % kwargs['loadpath'])
-    if opt.multi_label > 1:
-        criterion = nn.BCELoss().cuda()
-    else:
-        criterion = nn.CrossEntropyLoss().cuda()
+    #if opt.multi_label > 1:
+    #    criterion = nn.BCELoss()
+    #else:
+    criterion = nn.CrossEntropyLoss().cuda()
     validate(test_dataloader, model, criterion, True)
 
 
@@ -94,13 +94,15 @@ def validate(val_loader, model, criterion, outfile='predict', seeout = False):
             # target = target.cuda(args.gpu, non_blocking=True)
 
             # compute output
-            target = target.cuda()
-            datas = datas.cuda().float()
-            output = model(datas)
-            loss = criterion(output, target)
             # measure accuracy and record loss
             if opt.multi_label > 1:
-                acc, output_list, batch_pred, batch_target, origin_target = accuracu_multilabel(output, label)
+                target = target.cuda().float()
+                datas = datas.cuda().float()
+                output = model(datas)
+                #loss = criterion(output, target)
+                loss1 = nn.BCELoss()
+                loss = loss1(output, target)
+                acc, output_list, batch_pred, batch_target, origin_target = accuracy_multilabel(output, target)
                 if seeout:
                     writepred = pred5.tolist()
                     max5out = max5out.tolist()
@@ -111,10 +113,10 @@ def validate(val_loader, model, criterion, outfile='predict', seeout = False):
                                         ',' + "target_origin:" + str(origin_target[i]).strip('[').strip(']') + 
                                         ',' + "acc:" + str(acc) + '\r\n')
                 multi_label_acc.update(acc, 1)
-                losses.update(trainloss.item(), datas.size(0))
-                if lossesnum > losses.val:
-                    lossesnum = losses.val
-                    print('====iter *{}==== * * *   losses.val :{} Update   ========\n'.format(ii, lossesnum))
+                losses.update(loss.item(), datas.size(0))
+                #if lossesnum > losses.val:
+                #    lossesnum = losses.val
+                #    print('====iter *{}==== * * *   losses.val :{} Update   ========\n'.format(ii, lossesnum))
                     # best_path = trainer.save(better=True)
                     # print("====epoch[{}]--- iter[{}] ** save params *******===".format(epoch, ii))
 
@@ -127,15 +129,17 @@ def validate(val_loader, model, criterion, outfile='predict', seeout = False):
                 batch_time.update(time.time() - end)
                 end = time.time()
 
-                if (ii + 1) % opt.plot_every == 0:
-                    print('Test: [{0}][{1}/{2}]\t'
-                          'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
-                          'Data {data_time.val:.3f} ({data_time.avg:.3f})\t'
-                          'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
-                          'Acc@hamming {multi_label_acc.val:.3f} ({multi_label_acc.avg:.3f})\t'.format(
-                           epoch, ii, len(train_loader), batch_time=batch_time,
-                           data_time=data_time, loss=losses, multi_label_acc=multi_label_acc))
+                #if (i + 1) % opt.plot_every == 0:
+                print('Test: [{0}/{1}]\t'
+                      'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
+                      'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
+                      'Acc@hamming {multi_label_acc.val:.3f} ({multi_label_acc.avg:.3f})\t'.format(
+                       i, len(val_loader), batch_time=batch_time,                                         loss=losses, multi_label_acc=multi_label_acc))
             else:
+                target = target.cuda()
+                datas = datas.cuda().float()
+                output = model(datas)
+                loss = criterion(output, target)
                 acc, pred5, max5out = accuracy(output, target, topk=(1, 5))
                 if seeout:
                     writepred = pred5.tolist()
@@ -153,14 +157,13 @@ def validate(val_loader, model, criterion, outfile='predict', seeout = False):
                 batch_time.update(time.time() - end)
                 end = time.time()
 
-                if i % opt.plot_every == 0:
-                    print('Test: [{0}/{1}]\t'
-                          'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
-                          'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
-                          'Acc@1 {top1.val:.3f} ({top1.avg:.3f})\t'
-                          'Acc@5 {top5.val:.3f} ({top5.avg:.3f})'.format(
-                           i, len(val_loader), batch_time=batch_time, loss=losses,
-                           top1=top1, top5=top5))
+                #if i % opt.plot_every == 0:
+                print('Test: [{0}/{1}]\t'
+                      'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
+                      'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
+                      'Acc@1 {top1.val:.3f} ({top1.avg:.3f})\t'
+                      'Acc@5 {top5.val:.3f} ({top5.avg:.3f})'.format(                                      i, len(val_loader), batch_time=batch_time, loss=losses,
+                      top1=top1, top5=top5))
 
         print(' * Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f}'
               .format(top1=top1, top5=top5))
@@ -225,7 +228,7 @@ def main_worker():
         train(train_dataloader, trainer, epoch)
 
         # evaluate on validation set
-        top1avr, _ = validate(test_dataloader, model, criterion, seeout=False)
+        #top1avr, _ = validate(test_dataloader, model, criterion, seeout=False)
 
         # if best_acc1 < top1avr:
         #     best_acc1 = top1avr
@@ -284,13 +287,20 @@ def train(train_loader, trainer, epoch):
         # measure data loading time
         data_time.update(time.time() - end)
 
-        datas, label = datas_.cuda().float(), label_.cuda()
+        if opt.multi_label>1:
+            datas, label = datas_.cuda().float(), label_.cuda().float()
+        else:
+            datas, label = datas_.cuda().float(), label_.cuda()
+       
+        #print(label)
+        #print(type(label))
         trainloss, output = trainer.train_step(label, datas)
         # print('==========output=======[{}]===='.format(output))
         # measure accuracy and record loss
         if opt.multi_label > 1:
-            acc, output_list, batch_pred, batch_target, origin_target = accuracu_multilabel(output, label)
+            acc, output_list, batch_pred, batch_target, origin_target = accuracy_multilabel(output, label)
             multi_label_acc.update(acc, 1)
+            #print(trainloss)
             losses.update(trainloss.item(), datas.size(0))
             if lossesnum > losses.val:
                 lossesnum = losses.val
@@ -352,8 +362,8 @@ def train(train_loader, trainer, epoch):
                 logging.info(' train-----* ===Epoch: [{0}][{1}/{2}]\t Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f} Loss {loss.val:.4f}'
                   .format(epoch, ii, len(train_loader), top1=top1, top5=top5, loss=losses))
 
-def accuracu_multilabel(output, target):
-    print("output", output)
+def accuracy_multilabel(output, target):
+    #print("output", output)
     with torch.no_grad():
         batch_pred = []
         batch_target = []
@@ -365,8 +375,8 @@ def accuracu_multilabel(output, target):
             new_item_target = [0]*len(opt.labels_dict)
             for idx in item_target:
                 new_item_origin_target.append(idx)
-                if idx != 0:
-                    new_item_target[opt.labels_dict.index(idx)]=1
+                if int(idx) != 0:
+                    new_item_target[opt.labels_dict.index(int(idx))]=1
             origin_target.append(new_item_origin_target)
             batch_target.append(new_item_target)
 
