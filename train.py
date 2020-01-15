@@ -102,16 +102,15 @@ def validate(val_loader, model, criterion, outfile='predict', seeout = False):
                 #loss = criterion(output, target)
                 loss1 = nn.BCELoss()
                 loss = loss1(output, target)
-                acc, output_list, batch_pred, batch_target, origin_target = accuracy_multilabel(output, target)
+                acc, acc_list, output_list, batch_pred, batch_target = accuracy_multilabel(output, target)
                 if seeout:
-                    writepred = pred5.tolist()
-                    max5out = max5out.tolist()
-                    for i in len(output_list) :
+                    #writepred = pred5.tolist()
+                    #max5out = max5out.tolist()
+                    for i in range(len(output_list)):
                         outf.writelines("output:" + str(output_list[i]).strip('[').strip(']') + 
                                         ',' + "pred:" + str(batch_pred[i]).strip('[').strip(']') + 
                                         ',' + "target_encode:" + str(batch_target[i]).strip('[').strip(']') + 
-                                        ',' + "target_origin:" + str(origin_target[i]).strip('[').strip(']') + 
-                                        ',' + "acc:" + str(acc) + '\r\n')
+                                        ',' + "hamming acc:" + str(acc_list[i]) + '\r\n')
                 multi_label_acc.update(acc, 1)
                 losses.update(loss.item(), datas.size(0))
                 #if lossesnum > losses.val:
@@ -129,8 +128,8 @@ def validate(val_loader, model, criterion, outfile='predict', seeout = False):
                 batch_time.update(time.time() - end)
                 end = time.time()
 
-                #if (i + 1) % opt.plot_every == 0:
-                print('Test: [{0}/{1}]\t'
+                if (i + 1) % opt.plot_every == 0:
+                    print('Test: [{0}/{1}]\t'
                       'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
                       'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
                       'Acc@hamming {multi_label_acc.val:.3f} ({multi_label_acc.avg:.3f})\t'.format(
@@ -157,20 +156,27 @@ def validate(val_loader, model, criterion, outfile='predict', seeout = False):
                 batch_time.update(time.time() - end)
                 end = time.time()
 
-                #if i % opt.plot_every == 0:
-                print('Test: [{0}/{1}]\t'
+                if i % opt.plot_every == 0:
+                    print('Test: [{0}/{1}]\t'
                       'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
                       'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
                       'Acc@1 {top1.val:.3f} ({top1.avg:.3f})\t'
                       'Acc@5 {top5.val:.3f} ({top5.avg:.3f})'.format(                                      i, len(val_loader), batch_time=batch_time, loss=losses,
                       top1=top1, top5=top5))
-
+    if opt.multi_label > 1:
+        print(' * Acc@hamming {multi_label_acc.avg:.3f}'
+            .format(multi_label_acc=multi_label_acc))
+    else:
         print(' * Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f}'
-              .format(top1=top1, top5=top5))
+            .format(top1=top1, top5=top5))
         logging.info(' validate-----* Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f} Loss {loss.val:.4f}'
               .format(top1=top1, top5=top5, loss=losses))
     if seeout:
-        outf.writelines('* Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f} Loss {loss.val:.4f}\r\n'
+        if opt.multi_label > 1: 
+            outf.writelines('* Acc@hamming {multi_label_acc.avg:.3f} Loss {loss.val:.4f}\r\n'
+             .format(multi_label_acc=multi_label_acc, loss=losses))
+        else:
+            outf.writelines('* Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f} Loss {loss.val:.4f}\r\n'
                 .format(top1=top1, top5=top5, loss=losses))
         outf.writelines('======user config========')
         outf.writelines(pformat(opt._state_dict()))
@@ -225,8 +231,10 @@ def main_worker():
 
     for epoch in range(opt.epoch):
         #trainer.reset_meters()
+       
         train(train_dataloader, trainer, epoch)
-
+        validate(test_dataloader, model, criterion, opt.predict_name, seeout=True)
+        
         # evaluate on validation set
         #top1avr, _ = validate(test_dataloader, model, criterion, seeout=False)
 
@@ -298,7 +306,7 @@ def train(train_loader, trainer, epoch):
         # print('==========output=======[{}]===='.format(output))
         # measure accuracy and record loss
         if opt.multi_label > 1:
-            acc, output_list, batch_pred, batch_target, origin_target = accuracy_multilabel(output, label)
+            acc, acc_list,  output_list, batch_pred, batch_target = accuracy_multilabel(output, label)
             multi_label_acc.update(acc, 1)
             #print(trainloss)
             losses.update(trainloss.item(), datas.size(0))
@@ -368,37 +376,44 @@ def accuracy_multilabel(output, target):
         batch_pred = []
         batch_target = []
         output_list = []
+        hamming_acc_list = []
         hamming_acc = 0.0
         origin_target = []
-        for i, item_target in enumerate(target):
-            new_item_origin_target = []
-            new_item_target = [0]*len(opt.labels_dict)
-            for idx in item_target:
-                new_item_origin_target.append(idx)
-                if int(idx) != 0:
-                    new_item_target[opt.labels_dict.index(int(idx))]=1
-            origin_target.append(new_item_origin_target)
-            batch_target.append(new_item_target)
-
+        #for i, item_target in enumerate(target):
+        #    new_item_origin_target = []
+        #    new_item_target = [0]*len(opt.labels_dict)
+        #    for idx in item_target:
+        #        new_item_origin_target.append(idx)
+        #        if int(idx) != 0:
+        #            new_item_target[opt.labels_dict.index(int(idx))]=1
+        #    origin_target.append(new_item_origin_target)
+        #    batch_target.append(new_item_target)
+        batch_target = target.int().tolist()
         for i, item_output in enumerate(output):
-            new_item_output = []
+            #new_item_output = []
+            acc_item = 0
             new_item_pred = [0]*len(opt.labels_dict)
             for j, single_label_pred in enumerate(item_output):
-                new_item_output.append(single_label_pred)
+                #new_item_output.append(single_label_pred)
                 if single_label_pred>0.5:
                     new_item_pred[j] = 1
                 else:
                     new_item_pred[j] = 0
                 if new_item_pred[j] == batch_target[i][j]:
                     hamming_acc += 1.0
-            output_list.append(new_item_output)
+                    acc_item += 1.0
+            acc_item = acc_item / len(item_output)
+            hamming_acc_list.append(acc_item)
+            #output_list.append(new_item_output)
             batch_pred.append(new_item_pred)
 
+        output_list = output.tolist()
         hamming_acc = hamming_acc / (len(target)*len(target[0]))
 
         acc = hamming_acc
-
-        return acc, output_list, batch_pred, batch_target, origin_target
+        #print(acc, output_list, batch_pred, batch_target)#, origin_target)
+        
+        return acc, hamming_acc_list, output_list, batch_pred, batch_target #, origin_target
 
 
 def accuracy(output, target, topk=(1,)):
