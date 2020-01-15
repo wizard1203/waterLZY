@@ -6,7 +6,9 @@ import logging
 class Config:
     # data
     data_dir = ' '
+    test_data_dir = None
     out_pred_dir = '/home/zhtang/waterLZY/txt/'
+    test_data_name = None
     out = 'predict'
 
     nets = ['waternetsmallfl', 'watercnndsnetf_in4_out58', 'waterdsnetf_in4_out58', 'waterdsnetf_self_define']
@@ -130,6 +132,11 @@ class Config:
             self.labels_dict = self.labels_dict_58
 
         self.predict_name = self.logging_name + self.predict_name
+        if self.test_data_dir:
+            self.logging_name = self.logging_name + '_TestWith_' +self.test_data_name
+        else:
+            pass
+
         self.logging_name = self.logging_name + '.log'
         logging_path = os.path.join('log', self.logging_name)
     

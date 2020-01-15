@@ -47,7 +47,10 @@ class TrainDataset(Dataset):
 class TestDataset(Dataset):
     def __init__(self, config, split='test'):
         self.config = config
-        self.db = WaterDataset(config.data_dir, split=split)
+        if config.test_data_dir:
+            self.db = WaterDataset(config.test_data_dir, split=split)
+        else:
+            self.db = WaterDataset(config.data_dir, split=split)
 
 
     def __getitem__(self, idx):
