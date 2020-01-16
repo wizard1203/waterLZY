@@ -131,15 +131,14 @@ class Config:
         elif opt.arch == 'waternetsmallfl':
             self.labels_dict = self.labels_dict_58
 
-        self.predict_name = self.logging_name + self.predict_name
         if self.test_data_dir:
             self.logging_name = self.logging_name + '_TestWith_' +self.test_data_name
         else:
             pass
-
+        print(self.logging_name)
+        self.predict_name = self.logging_name + self.predict_name 
         self.logging_name = self.logging_name + '.log'
         logging_path = os.path.join('log', self.logging_name)
-    
         logging.basicConfig(level=logging.DEBUG,
                         filename=logging_path,
                         filemode='a',

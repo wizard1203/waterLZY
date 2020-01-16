@@ -25,6 +25,7 @@ import logging
 class TrainDataset(Dataset):
     def __init__(self, config, split='train'):
         self.config = config
+        print(config.data_dir)
         self.db = WaterDataset(config.data_dir, split=split)
 
 

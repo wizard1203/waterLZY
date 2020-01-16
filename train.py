@@ -233,7 +233,7 @@ def main_worker():
         #trainer.reset_meters()
        
         train(train_dataloader, trainer, epoch)
-        validate(test_dataloader, model, criterion, opt.predict_name, seeout=True)
+        #validate(test_dataloader, model, criterion, opt.predict_name, seeout=True)
         
         # evaluate on validation set
         #top1avr, _ = validate(test_dataloader, model, criterion, seeout=False)
