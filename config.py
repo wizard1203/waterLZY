@@ -138,11 +138,11 @@ class Config:
         else:
             pass
         print(self.logging_name)
-        self.predict_name = self.logging_name + self.predict_name
         if self.num_of_samples == 'default':
             self.logging_name = self.logging_name + '_num_of_samples_' + self.num_of_samples
         else:
             self.logging_name = self.logging_name + '_num_of_samples_' + str(self.num_of_samples)
+        self.predict_name = self.logging_name + self.predict_name
         self.logging_name = self.logging_name + '.log'
         logging_path = os.path.join('log', self.logging_name)
         logging.basicConfig(level=logging.DEBUG,
