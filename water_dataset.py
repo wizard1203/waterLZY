@@ -48,7 +48,7 @@ class WaterDataset:
         if num_of_samples == 'default':
             self.list_file = os.listdir(self.data_dir)
         else:
-            num_of_samples = int(num_of_samples)
+            #num_of_samples = int(num_of_samples)
             self.list_file = os.listdir(self.data_dir)[0:num_of_samples]
 
     def __len__(self):
