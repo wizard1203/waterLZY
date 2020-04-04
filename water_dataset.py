@@ -43,9 +43,13 @@ def read_sample(sample_file_path):
 
 class WaterDataset:
 
-    def __init__(self, data_dir, split='train'):
+    def __init__(self, data_dir, num_of_samples='default', split='train'):
         self.data_dir = os.path.join(data_dir, split)
-        self.list_file = os.listdir(self.data_dir)
+        if num_of_samples == 'default':
+            self.list_file = os.listdir(self.data_dir)
+        else:
+            num_of_samples = int(num_of_samples)
+            self.list_file = os.listdir(self.data_dir)[0:num_of_samples]
 
     def __len__(self):
         return len(self.list_file)

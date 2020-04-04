@@ -11,6 +11,8 @@ class Config:
     test_data_name = None
     out = 'predict'
 
+    num_of_samples = 'default'
+
     nets = ['waternetsmallfl', 'watercnndsnetf_in4_out58', 'waterdsnetf_in4_out58', 'waterdsnetf_self_define']
 
     # pretrained
@@ -137,6 +139,7 @@ class Config:
             pass
         print(self.logging_name)
         self.predict_name = self.logging_name + self.predict_name 
+        self.logging_name = self.logging_name + '_num_of_samples_' + self.num_of_samples
         self.logging_name = self.logging_name + '.log'
         logging_path = os.path.join('log', self.logging_name)
         logging.basicConfig(level=logging.DEBUG,
