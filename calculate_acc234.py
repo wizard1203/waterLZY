@@ -36,7 +36,7 @@ def accuracy(output, target):
 
 if __name__ == '__main__':
 
-	filePath = "..//exp_results200115//exp_results200115"
+	filePath = "..//exp_results//exp_results"
 	acc234_path = os.path.join(filePath, "acc234.txt")
 	files = os.listdir(filePath)
 	acc234 = open(acc234_path, 'w')
