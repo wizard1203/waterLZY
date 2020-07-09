@@ -77,9 +77,12 @@ def val_out(**kwargs):
 def validate(val_loader, model, criterion, outfile='predict', seeout = False):
     batch_time = AverageMeter()
     losses = AverageMeter()
-    top1 = AverageMeter()
-    top5 = AverageMeter()
     multi_label_acc = AverageMeter()
+    top1 = AverageMeter()
+    top2 = AverageMeter()
+    top3 = AverageMeter()
+    top4 = AverageMeter()
+    top5 = AverageMeter()
     # switch to evaluate mode
     model.eval()
 
@@ -139,7 +142,7 @@ def validate(val_loader, model, criterion, outfile='predict', seeout = False):
                 datas = datas.cuda().float()
                 output = model(datas)
                 loss = criterion(output, target)
-                acc, pred5, max5out = accuracy(output, target, topk=(1, 5))
+                acc, pred5, max5out = accuracy(output, target, topk=(1, 2, 3, 4, 5))
                 if seeout:
                     writepred = pred5.tolist()
                     max5out = max5out.tolist()
@@ -147,9 +150,15 @@ def validate(val_loader, model, criterion, outfile='predict', seeout = False):
                         outf.writelines(str(item).strip('[').strip(']') + ',' + str(max5out[i]).strip('[').strip(']') +
                                         ',' + str(target.tolist()[i]) + '\r\n')
                 acc1 = acc[0]
-                acc5 = acc[1]
+                acc2 = acc[1]
+                acc3 = acc[2]
+                acc4 = acc[3]
+                acc5 = acc[4]
                 losses.update(loss.item(), datas.size(0))
                 top1.update(acc1[0], datas.size(0))
+                top2.update(acc2[0], datas.size(0))
+                top3.update(acc3[0], datas.size(0))
+                top4.update(acc4[0], datas.size(0))
                 top5.update(acc5[0], datas.size(0))
 
                 # measure elapsed time
@@ -161,23 +170,26 @@ def validate(val_loader, model, criterion, outfile='predict', seeout = False):
                       'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
                       'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
                       'Acc@1 {top1.val:.3f} ({top1.avg:.3f})\t'
+                      'Acc@2 {top2.val:.3f} ({top2.avg:.3f})\t'
+                      'Acc@3 {top3.val:.3f} ({top3.avg:.3f})\t'
+                      'Acc@4 {top4.val:.3f} ({top4.avg:.3f})\t'
                       'Acc@5 {top5.val:.3f} ({top5.avg:.3f})'.format(                                      i, len(val_loader), batch_time=batch_time, loss=losses,
-                      top1=top1, top5=top5))
+                      top1=top1, top2=top2, top3=top3, top4=top4, top5=top5))
     if opt.multi_label > 1:
         print(' * Acc@hamming {multi_label_acc.avg:.3f}'
             .format(multi_label_acc=multi_label_acc))
     else:
-        print(' * Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f}'
-            .format(top1=top1, top5=top5))
-        logging.info(' validate-----* Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f} Loss {loss.val:.4f}'
-              .format(top1=top1, top5=top5, loss=losses))
+        print(' * Acc@1 {top1.avg:.3f} Acc@2 {top2.avg:.3f} Acc@3 {top3.avg:.3f} Acc@4 {top4.avg:.3f} Acc@5 {top5.avg:.3f}'
+            .format(top1=top1, top2=top2, top3=top3, top4=top4, top5=top5))
+        logging.info(' validate-----* Acc@1 {top1.avg:.3f} Acc@2 {top2.avg:.3f} Acc@3 {top3.avg:.3f} Acc@4 {top4.avg:.3f} Acc@5 {top5.avg:.3f} Loss {loss.val:.4f}\r\n'
+            .format(top1=top1, top2=top2, top3=top3, top4=top4, top5=top5, loss=losses))
     if seeout:
         if opt.multi_label > 1: 
             outf.writelines('* Acc@hamming {multi_label_acc.avg:.3f} Loss {loss.val:.4f}\r\n'
              .format(multi_label_acc=multi_label_acc, loss=losses))
         else:
-            outf.writelines('* Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f} Loss {loss.val:.4f}\r\n'
-                .format(top1=top1, top5=top5, loss=losses))
+            outf.writelines('* Acc@1 {top1.avg:.3f} Acc@2 {top2.avg:.3f} Acc@3 {top3.avg:.3f} Acc@4 {top4.avg:.3f} Acc@5 {top5.avg:.3f} Loss {loss.val:.4f}\r\n'
+            .format(top1=top1, top2=top2, top3=top3, top4=top4, top5=top5, loss=losses))
         outf.writelines('======user config========')
         outf.writelines(pformat(opt._state_dict()))
     outf.close()
@@ -233,8 +245,7 @@ def main_worker():
         #trainer.reset_meters()
        
         train(train_dataloader, trainer, epoch)
-        #validate(test_dataloader, model, criterion, opt.predict_name, seeout=True)
-        
+        validate(test_dataloader, model, criterion, opt.predict_name, seeout=False)
         # evaluate on validation set
         #top1avr, _ = validate(test_dataloader, model, criterion, seeout=False)
 
@@ -285,6 +296,9 @@ def train(train_loader, trainer, epoch):
     data_time = AverageMeter()
     losses = AverageMeter()
     top1 = AverageMeter()
+    top2 = AverageMeter()
+    top3 = AverageMeter()
+    top4 = AverageMeter()
     top5 = AverageMeter()
 
     multi_label_acc = AverageMeter()
@@ -336,12 +350,19 @@ def train(train_loader, trainer, epoch):
                 logging.info(' train-----* ===Epoch: [{0}][{1}/{2}]\t Acc@hamming {multi_label_acc.avg:.3f} Loss {loss.val:.4f}'
                   .format(epoch, ii, len(train_loader), multi_label_acc=multi_label_acc, loss=losses))
         else:
-            acc, pred5, max5out= accuracy(output, label, topk=(1, 5))
+            acc, pred5, max5out= accuracy(output, label, topk=(1, 2, 3, 4, 5))
             acc1 = acc[0]
-            acc5 = acc[1]
+            acc2 = acc[1]
+            acc3 = acc[2]
+            acc4 = acc[3]
+            acc5 = acc[4]
             losses.update(trainloss.item(), datas.size(0))
             top1.update(acc1[0], datas.size(0))
+            top2.update(acc2[0], datas.size(0))
+            top3.update(acc3[0], datas.size(0))
+            top4.update(acc4[0], datas.size(0))
             top5.update(acc5[0], datas.size(0))
+
 
             if lossesnum > losses.val:
                 lossesnum = losses.val
@@ -364,11 +385,14 @@ def train(train_loader, trainer, epoch):
                       'Data {data_time.val:.3f} ({data_time.avg:.3f})\t'
                       'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
                       'Acc@1 {top1.val:.3f} ({top1.avg:.3f})\t'
+                      'Acc@2 {top2.val:.3f} ({top2.avg:.3f})\t'
+                      'Acc@3 {top3.val:.3f} ({top3.avg:.3f})\t'
+                      'Acc@4 {top4.val:.3f} ({top4.avg:.3f})\t'
                       'Acc@5 {top5.val:.3f} ({top5.avg:.3f})'.format(
                        epoch, ii, len(train_loader), batch_time=batch_time,
-                       data_time=data_time, loss=losses, top1=top1, top5=top5))
-                logging.info(' train-----* ===Epoch: [{0}][{1}/{2}]\t Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f} Loss {loss.val:.4f}'
-                  .format(epoch, ii, len(train_loader), top1=top1, top5=top5, loss=losses))
+                       data_time=data_time, loss=losses, top1=top1, top2=top2, top3=top3, top4=top4, top5=top5))
+                logging.info(' train-----* ===Epoch: [{0}][{1}/{2}]\t Acc@1 {top1.avg:.3f} Acc@2 {top2.avg:.3f} Acc@3 {top3.avg:.3f} Acc@4 {top4.avg:.3f} Acc@5 {top5.avg:.3f} Loss {loss.val:.4f}'
+                  .format(epoch, ii, len(train_loader), top1=top1, top2=top2, top3=top3, top4=top4, top5=top5, loss=losses))
 
 def accuracy_multilabel(output, target):
     #print("output", output)
