@@ -73,3 +73,55 @@ class WaterDataset:
     __getitem__ = get_example
 
 
+
+
+class aaaDataset:
+
+    def __init__(self, data_dir, num_of_samples='default', split='train'):
+        self.data_dir = os.path.join(data_dir, "IN.txt")
+        self.label_dir = os.path.join(data_dir, "OUT.txt")
+
+        with open(self.data_dir, 'r') as f:
+            lines = f.readlines()
+
+            if num_of_samples == 'default':
+                self.num_of_samples = len(lines)
+            else:
+                self.num_of_samples = num_of_samples
+        f.close()
+
+    def __len__(self):
+        return self.num_of_samples
+
+    def get_example(self, i, model='train'):
+        """Returns the i-th sample.
+
+        Args:
+            i (int): The index of the sample_files.
+
+        Returns:
+            a data sample
+
+        """
+        # Load a sample
+        if model=='train':
+            i = i
+        else:
+            i = int(self.num_of_samples*0.0) + i
+
+        with open(self.data_dir, 'r') as f_data:
+            data = [ float(item) for item in f_data.readlines()[i].split()]
+            print(data)
+            print(len(data))
+        f_data.close()
+        with open(self.label_dir, 'r') as f_label:
+            label = [ float(item) for item in f_label.readlines()[i].split()]
+            print(label)
+            print(len(label))
+        f_data.close()
+
+        return label, data
+
+    __getitem__ = get_example
+
+

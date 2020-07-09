@@ -26,3 +26,6 @@ class MyModels:
 
     def waternetsmallfl(opt):
         return waternets.WaterNetSmallFL()
+
+    def aaanet(opt):
+        return waternets.AAANet()
