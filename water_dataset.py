@@ -111,13 +111,13 @@ class aaaDataset:
 
         with open(self.data_dir, 'r') as f_data:
             data = [ float(item) for item in f_data.readlines()[i].split()]
-            print(data)
-            print(len(data))
+            #print(data)
+            #print(len(data))
         f_data.close()
         with open(self.label_dir, 'r') as f_label:
             label = [ float(item) for item in f_label.readlines()[i].split()]
-            print(label)
-            print(len(label))
+            #print(label)
+            #print(len(label))
         f_data.close()
 
         return label, data

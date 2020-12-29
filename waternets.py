@@ -472,12 +472,12 @@ class WaterDenseNet_self_define(nn.Module):
 
 class AAANet(nn.Module):
     def __init__(self):
-        super(WaterNet, self).__init__()
+        super(AAANet, self).__init__()
         # self.conv1 = nn.Conv2d(1, 2, kernel_size=1)
         self.fc1 = nn.Linear(6, 200)
         self.fc2 = nn.Linear(200, 50)
         self.fc3 = nn.Linear(50, 17)
-        self.fc4 = nn.Linear(17， 1)
+        self.fc4 = nn.Linear(17, 1)
 
     def forward(self, x):
         # x = F.relu(self.conv1(x))

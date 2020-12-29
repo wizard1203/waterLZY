@@ -36,6 +36,8 @@ class WaterNetTrainer(nn.Module):
             loss.backward()
         else:
             loss = F.nll_loss(pred, label)
+            #loss1 = nn.MSELoss()
+            #loss = loss1(pred, label)
             loss.backward()
         self.optimizer.step()
         

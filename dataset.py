@@ -26,12 +26,14 @@ class TrainDataset(Dataset):
     def __init__(self, config, split='train'):
         self.config = config
         print(config.data_dir)
-        # self.db = WaterDataset(config.data_dir, config.num_of_samples, split=split)
-        self.db = aaaDataset(config.data_dir, config.num_of_samples, split=split)
+        self.db = WaterDataset(config.data_dir, config.num_of_samples, split=split)
+        #self.db = aaaDataset(config.data_dir, config.num_of_samples, split=split)
 
     def __getitem__(self, idx):
-        # label, datas = self.db.get_example(idx)
-        label, datas = self.db.get_example(idx, 'train')
+        label, datas = self.db.get_example(idx)
+        #label, datas = self.db.get_example(idx, 'train')
+        #label = t.from_numpy(np.array(label).astype(np.float32))
+
         label = t.from_numpy(np.array(label))
         datas = np.array(datas)
 
@@ -53,14 +55,17 @@ class TestDataset(Dataset):
             self.db = WaterDataset(config.test_data_dir, split=split)
         else:
             self.db = WaterDataset(config.data_dir, split=split)
-        self.db = aaaDataset(config.data_dir, config.num_of_samples, split=split)
+        #self.db = aaaDataset(config.data_dir, config.num_of_samples, split=split)
 
     def __getitem__(self, idx):
-        # label, datas = self.db.get_example(idx)
-        label, datas = self.db.get_example(idx, 'test')
+        label, datas = self.db.get_example(idx)
+        #label, datas = self.db.get_example(idx, 'test')
+        #label = t.from_numpy(np.array(label).astype(np.float32))
+
+
         label = t.from_numpy(np.array(label))
         datas = np.array(datas)
- 
+
         datas = t.from_numpy(datas)
         datas = datas.contiguous().view(1, -1)
         # TODO: check whose stride is negative to fix this instead copy all
