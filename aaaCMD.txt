@@ -1,0 +1,5 @@
+
+CUDA_VISIBLE_DEVICES=1 ~/miniconda2/envs/py27/bin/python train.py main --arch fc --lr 0.000001 --epoch 120 --kind aaa --data_dir ~/water/aaa  --out aaaaaaa2222
+
+
+CUDA_VISIBLE_DEVICES=0 ~/miniconda2/envs/py27/bin/python train.py main --arch densefc --lr 0.0001 --epoch 120 --kind aaa --data_dir ~/water/aaa  --out aaaaaaa2222

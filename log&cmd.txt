@@ -1,0 +1,7 @@
+CUDA_VISIBLE_DEVICES=0 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind data1 --data_dir ~/waterLZY/data1 --save_path '/home/comp/zhtang/water/modelparams' --out data11 (h21g1)		acc1 95
+
+
+
+
+
+CUDA_VISIBLE_DEVICES=0 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R1S1 --data_dir ~/water/191220_SpeedAndFric_R1S1 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R1S1   (host144)		acc1 95

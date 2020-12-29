@@ -1,0 +1,296 @@
+===========================================191220_SpeedAndFric_R1S1===========================================
+CUDA_VISIBLE_DEVICES=0 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R1S1 --data_dir ~/water/191220_SpeedAndFric_R1S1 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R1S1    host144   Acc@1 91.480 Acc@5 99.890 
+
+CUDA_VISIBLE_DEVICES=0 python train.py main --arch waterdsnetf --lr 0.5 --epoch 120 --kind 191220_SpeedAndFric_R1S1 --data_dir ~/water/191220_SpeedAndFric_R1S1 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R1S1    host144       Acc@1 90.880 Acc@5 99.720
+
+CUDA_VISIBLE_DEVICES=0 python train.py main --arch waterdsnetf --lr 0.8 --epoch 120 --kind 191220_SpeedAndFric_R1S1 --data_dir ~/water/191220_SpeedAndFric_R1S1 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R1S1    host144   Acc@1 91.300 Acc@5 99.720
+
+CUDA_VISIBLE_DEVICES=0 python train.py main --arch waterdsnetf --lr 0.2 --epoch 120 --kind 191220_SpeedAndFric_R1S1 --data_dir ~/water/191220_SpeedAndFric_R1S1 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R1S1    host144    Acc@1 89.840 Acc@5 99.830
+
+===========================================191220_SpeedAndFric_R1S2===========================================
+CUDA_VISIBLE_DEVICES=0 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R1S2 --data_dir ~/water/191220_SpeedAndFric_R1S2 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R1S2   host144    Acc@1 84.390 Acc@5 99.250
+
+===========================================191220_SpeedAndFric_R1S3===========================================
+CUDA_VISIBLE_DEVICES=0 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R1S3 --data_dir ~/water/191220_SpeedAndFric_R1S3 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R1S3   host144  Acc@1 78.320 Acc@5 98.430
+
+
+===========================================191220_SpeedAndFric_R1S4===========================================
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R1S4 --data_dir ~/water/191220_SpeedAndFric_R1S4 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R1S4   host144    Acc@1 71.940 Acc@5 97.410
+
+===========================================191220_SpeedAndFric_R1S5===========================================
+CUDA_VISIBLE_DEVICES=3 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R1S5 --data_dir ~/water/191220_SpeedAndFric_R1S5 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R1S5   host144   Acc@1 64.650 Acc@5 96.080 
+
+===========================================191220_SpeedAndFric_R1S6===========================================
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R1S6 --data_dir ~/water/191220_SpeedAndFric_R1S6 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R1S6   host144   Acc@1 59.980 Acc@5 94.270
+
+===========================================191220_SpeedAndFric_R2S1===========================================
+CUDA_VISIBLE_DEVICES=2 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R2S1 --data_dir ~/water/191220_SpeedAndFric_R2S1 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R2S1    host144   Acc@1 90.900 Acc@5 99.680
+
+===========================================191220_SpeedAndFric_R2S2===========================================
+CUDA_VISIBLE_DEVICES=3 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R2S2 --data_dir ~/water/191220_SpeedAndFric_R2S2 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R2S2    host144   Acc@1 84.500 Acc@5 99.250
+
+===========================================191220_SpeedAndFric_R2S3===========================================
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R2S3 --data_dir ~/water/191220_SpeedAndFric_R2S3 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R2S3    host144    Acc@1 75.560 Acc@5 98.100
+
+
+===========================================191220_SpeedAndFric_R2S4===========================================
+CUDA_VISIBLE_DEVICES=2 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R2S4 --data_dir ~/water/191220_SpeedAndFric_R2S4 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R2S4    host144    Acc@1 69.650 Acc@5 97.060
+
+
+===========================================191220_SpeedAndFric_R2S5===========================================
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R2S5 --data_dir ~/water/191220_SpeedAndFric_R2S5 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R2S5    host144   Acc@1 64.570 Acc@5 95.200
+
+===========================================191220_SpeedAndFric_R2S6===========================================
+CUDA_VISIBLE_DEVICES=2 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R2S6 --data_dir ~/water/191220_SpeedAndFric_R2S6 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R2S6    host144   Acc@1 58.260 Acc@5 94.200
+
+===========================================191220_SpeedAndFric_R3S1===========================================
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R3S1 --data_dir ~/water/191220_SpeedAndFric_R3S1 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R3S1    host144   Acc@1 88.920 Acc@5 99.510
+
+===========================================191220_SpeedAndFric_R3S2===========================================
+CUDA_VISIBLE_DEVICES=2 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R3S2 --data_dir ~/water/191220_SpeedAndFric_R3S2 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R3S2    host144   Acc@1 83.940 Acc@5 99.100
+
+===========================================191220_SpeedAndFric_R3S3===========================================
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R3S3 --data_dir ~/water/191220_SpeedAndFric_R3S3 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R3S3    host144   Acc@1 75.930 Acc@5 97.750
+
+===========================================191220_SpeedAndFric_R3S4===========================================
+CUDA_VISIBLE_DEVICES=2 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R3S4 --data_dir ~/water/191220_SpeedAndFric_R3S4 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R3S4    host144   Acc@1 68.300 Acc@5 95.860
+
+
+===========================================191220_SpeedAndFric_R3S5===========================================
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R3S5 --data_dir ~/water/191220_SpeedAndFric_R3S5 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R3S5    host144    Acc@1 62.000 Acc@5 94.400
+
+===========================================191220_SpeedAndFric_R3S6===========================================
+CUDA_VISIBLE_DEVICES=2 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R3S6 --data_dir ~/water/191220_SpeedAndFric_R3S6 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R3S6    host144    Acc@1 55.360 Acc@5 91.650
+
+
+===========================================191220_SpeedAndFric_R4S1===========================================
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R4S1 --data_dir ~/water/191220_SpeedAndFric_R4S1 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R4S1    host144   Acc@1 90.050 Acc@5 99.440
+
+===========================================191220_SpeedAndFric_R4S2===========================================
+CUDA_VISIBLE_DEVICES=2 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R4S2 --data_dir ~/water/191220_SpeedAndFric_R4S2 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R4S2    host144    Acc@1 82.370 Acc@5 98.590
+
+
+===========================================191220_SpeedAndFric_R4S3===========================================
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R4S3 --data_dir ~/water/191220_SpeedAndFric_R4S3 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R4S3    host144   Acc@1 73.590 Acc@5 96.900
+
+
+===========================================191220_SpeedAndFric_R4S4===========================================
+CUDA_VISIBLE_DEVICES=2 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R4S4 --data_dir ~/water/191220_SpeedAndFric_R4S4 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R4S4    host144   Acc@1 66.520 Acc@5 95.460  
+
+
+===========================================191220_SpeedAndFric_R4S5===========================================
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R4S5 --data_dir ~/water/191220_SpeedAndFric_R4S5 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R4S5    host144   Acc@1 59.350 Acc@5 93.070
+
+===========================================191220_SpeedAndFric_R4S6===========================================
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R4S6 --data_dir ~/water/191220_SpeedAndFric_R4S6 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R4S6    host144    Acc@1 52.530 Acc@5 90.190
+
+
+===========================================191220_SpeedAndFric_R5S1===========================================
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R5S1 --data_dir ~/water/191220_SpeedAndFric_R5S1 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R5S1    host144    Acc@1 89.660 Acc@5 99.460
+
+
+===========================================191220_SpeedAndFric_R5S2===========================================
+CUDA_VISIBLE_DEVICES=2 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R5S2 --data_dir ~/water/191220_SpeedAndFric_R5S2 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R5S2    host144     Acc@1 83.250 Acc@5 98.920
+
+
+===========================================191220_SpeedAndFric_R5S3===========================================
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R5S3 --data_dir ~/water/191220_SpeedAndFric_R5S3 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R5S3    host144    Acc@1 72.560 Acc@5 96.800
+
+
+===========================================191220_SpeedAndFric_R5S4===========================================
+CUDA_VISIBLE_DEVICES=2 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R5S4 --data_dir ~/water/191220_SpeedAndFric_R5S4 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R5S4    host144     Acc@1 64.550 Acc@5 94.240
+
+
+===========================================191220_SpeedAndFric_R5S5===========================================
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R5S5 --data_dir ~/water/191220_SpeedAndFric_R5S5 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R5S5    host144     Acc@1 58.270 Acc@5 91.980
+
+
+===========================================191220_SpeedAndFric_R5S6===========================================
+CUDA_VISIBLE_DEVICES=2 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R5S6 --data_dir ~/water/191220_SpeedAndFric_R5S6 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R5S6    host144   Acc@1 52.110 Acc@5 90.270
+
+
+===========================================191220_SpeedAndFric_R6S1===========================================
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R6S1 --data_dir ~/water/191220_SpeedAndFric_R6S1 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R6S1    host144    Acc@1 88.540 Acc@5 99.390 
+
+
+===========================================191220_SpeedAndFric_R6S2===========================================
+CUDA_VISIBLE_DEVICES=2 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R6S2 --data_dir ~/water/191220_SpeedAndFric_R6S2 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R6S2    host144    Acc@1 81.060 Acc@5 98.370
+
+===========================================191220_SpeedAndFric_R6S3===========================================
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R6S3 --data_dir ~/water/191220_SpeedAndFric_R6S3 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R6S3    host144    Acc@1 71.140 Acc@5 96.260
+
+===========================================191220_SpeedAndFric_R6S4===========================================
+CUDA_VISIBLE_DEVICES=2 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R6S4 --data_dir ~/water/191220_SpeedAndFric_R6S4 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R6S4    host144    Acc@1 63.170 Acc@5 93.640
+
+===========================================191220_SpeedAndFric_R6S5===========================================
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R6S5 --data_dir ~/water/191220_SpeedAndFric_R6S5 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R6S5    host144   Acc@1 56.450 Acc@5 91.540
+
+===========================================191220_SpeedAndFric_R6S6===========================================
+CUDA_VISIBLE_DEVICES=2 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_SpeedAndFric_R6S6 --data_dir ~/water/191220_SpeedAndFric_R6S6 --save_path '~/waterLZY/modelparams' --out 191220_SpeedAndFric_R6S6    host144   Acc@1 49.900 Acc@5 87.570
+
+######################################################################################################################
+===========================================191220_LeakScale_M1===========================================
+CUDA_VISIBLE_DEVICES=3 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_LeakScale_M1 ---data_dir ~/water/191220_LeakScale_M1 --save_path '~/waterLZY/modelparams' --out 191220_LeakScale_M1   host144   Acc@1 64.070 Acc@5 89.190
+
+CUDA_VISIBLE_DEVICES=0 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_LeakScale_M1 ---data_dir ~/water/191220_LeakScale_M1 --save_path '~/waterLZY/modelparams' --out 191220_LeakScale_M1 --test_data_dir  ~/water/191220_LeakScale_M2 --test_data_name 191220_LeakScale_M2 gpuhome  Acc@1 87.760 Acc@5 99.100
+
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_LeakScale_M1 --data_dir ~/water/191220_LeakScale_M1 --save_path '~/waterLZY/modelparams' --out 191220_LeakScale_M1 --test_data_dir  ~/water/191220_LeakScale_M3 --test_data_name 191220_LeakScale_M3 gpuhome 
+
+CUDA_VISIBLE_DEVICES=2 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_LeakScale_M1 --data_dir ~/water/191220_LeakScale_M1 --save_path '~/waterLZY/modelparams' --out 191220_LeakScale_M1 --test_data_dir  ~/water/191220_LeakScale_M4 --test_data_name 191220_LeakScale_M4 gpuhome 
+
+
+===========================================191220_LeakScale_M2===========================================
+CUDA_VISIBLE_DEVICES=3 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_LeakScale_M2 --data_dir ~/water/191220_LeakScale_M2 --save_path '~/waterLZY/modelparams' --out 191220_LeakScale_M2  host144  Acc@1 91.740 Acc@5 99.740
+
+CUDA_VISIBLE_DEVICES=3 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_LeakScale_M2 --data_dir ~/water/191220_LeakScale_M2 --save_path '~/waterLZY/modelparams' --out 191220_LeakScale_M2 --test_data_dir  ~/water/191220_LeakScale_M1 --test_data_name 191220_LeakScale_M1 gpuhome 
+
+CUDA_VISIBLE_DEVICES=2 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_LeakScale_M2 --data_dir ~/water/191220_LeakScale_M2 --save_path '~/waterLZY/modelparams' --out 191220_LeakScale_M2 --test_data_dir  ~/water/191220_LeakScale_M3 --test_data_name 191220_LeakScale_M3  gpuhome  Acc@1 93.590 Acc@5 99.940 
+
+CUDA_VISIBLE_DEVICES=3 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_LeakScale_M2 --data_dir ~/water/191220_LeakScale_M2 --save_path '~/waterLZY/modelparams' --out 191220_LeakScale_M2 --test_data_dir  ~/water/191220_LeakScale_M4 --test_data_name 191220_LeakScale_M4  gpuhome 
+
+===========================================191220_LeakScale_M3===========================================
+CUDA_VISIBLE_DEVICES=3 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_LeakScale_M3 --data_dir ~/water/191220_LeakScale_M3 --save_path '~/waterLZY/modelparams' --out 191220_LeakScale_M3   host144   Acc@1 93.960 Acc@5 99.910 
+
+CUDA_VISIBLE_DEVICES=3 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_LeakScale_M3 --data_dir ~/water/191220_LeakScale_M3 --save_path '~/waterLZY/modelparams' --out 191220_LeakScale_M3 --test_data_dir  ~/water/191220_LeakScale_M1 --test_data_name 191220_LeakScale_M1  gpuhome 
+
+CUDA_VISIBLE_DEVICES=1 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_LeakScale_M3 --data_dir ~/water/191220_LeakScale_M3 --save_path '~/waterLZY/modelparams' --out 191220_LeakScale_M3 --test_data_dir  ~/water/191220_LeakScale_M2 --test_data_name 191220_LeakScale_M2  gpuhome    Acc@1 84.040 Acc@5 98.540 
+
+CUDA_VISIBLE_DEVICES=3 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_LeakScale_M3 --data_dir ~/water/191220_LeakScale_M3 --save_path '~/waterLZY/modelparams' --out 191220_LeakScale_M3  --test_data_dir  ~/water/191220_LeakScale_M4 --test_data_name 191220_LeakScale_M4  gpuhome 
+
+===========================================191220_LeakScale_M4===========================================
+CUDA_VISIBLE_DEVICES=3 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_LeakScale_M4 --data_dir ~/water/191220_LeakScale_M4 --save_path '~/waterLZY/modelparams' --out 191220_LeakScale_M4   host144  Acc@1 95.030 Acc@5 99.890
+
+CUDA_VISIBLE_DEVICES=0 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_LeakScale_M4 --data_dir ~/water/191220_LeakScale_M4 --save_path '~/waterLZY/modelparams' --out 191220_LeakScale_M4   --test_data_dir  ~/water/191220_LeakScale_M1 --test_data_name 191220_LeakScale_M1  gpuhome  Acc@1 11.160 Acc@5 66.380
+
+
+CUDA_VISIBLE_DEVICES=3 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_LeakScale_M4 --data_dir ~/water/191220_LeakScale_M4 --save_path '~/waterLZY/modelparams' --out 191220_LeakScale_M4   --test_data_dir  ~/water/191220_LeakScale_M2 --test_data_name 191220_LeakScale_M2  gpuhome  Acc@1 60.610 Acc@5 93.660
+
+CUDA_VISIBLE_DEVICES=3 python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 191220_LeakScale_M4 --data_dir ~/water/191220_LeakScale_M4 --save_path '~/waterLZY/modelparams' --out 191220_LeakScale_M4   --test_data_dir  ~/water/191220_LeakScale_M3 --test_data_name 191220_LeakScale_M3  gpuhome 
+
+######################################################################################################################
+===========================================200115_LeakScale_M1===========================================
+CUDA_VISIBLE_DEVICES=0 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M1 --data_dir ~/water/200115_LeakScale_M1 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M1 gpuhome Acc@1 18.530 Acc@5 59.540  
+
+CUDA_VISIBLE_DEVICES=0 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M1 --data_dir ~/water/200115_LeakScale_M1 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M1 --test_data_dir  ~/water/200115_LeakScale_M2 --test_data_name 200115_LeakScale_M2  gpuhome   Acc@1 30.850 Acc@5 77.140
+
+CUDA_VISIBLE_DEVICES=1 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M1 --data_dir ~/water/200115_LeakScale_M1 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M1 --test_data_dir  ~/water/200115_LeakScale_M3 --test_data_name 200115_LeakScale_M3  gpuhome  Acc@1 40.350 Acc@5 85.790
+
+CUDA_VISIBLE_DEVICES=1 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M1 --data_dir ~/water/200115_LeakScale_M1 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M1 --test_data_dir  ~/water/200115_LeakScale_M4 --test_data_name 200115_LeakScale_M4  gpuhome Acc@1 46.950 Acc@5 88.370
+
+CUDA_VISIBLE_DEVICES=2 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M1 --data_dir ~/water/200115_LeakScale_M1 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M1 --test_data_dir  ~/water/200115_LeakScale_M5 --test_data_name 200115_LeakScale_M5  gpuhome Acc@1 40.490 Acc@5 85.520
+
+CUDA_VISIBLE_DEVICES=2 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M1 --data_dir ~/water/200115_LeakScale_M1 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M1 --test_data_dir  ~/water/200115_LeakScale_M6 --test_data_name 200115_LeakScale_M6  gpuhome Acc@1 41.580 Acc@5 90.790
+
+===========================================200115_LeakScale_M2===========================================
+CUDA_VISIBLE_DEVICES=3 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M2 --data_dir ~/water/200115_LeakScale_M2 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M2 gpuhome Acc@1 59.060 Acc@5 92.290
+
+CUDA_VISIBLE_DEVICES=3 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M2 --data_dir ~/water/200115_LeakScale_M2 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M2 --test_data_dir  ~/water/200115_LeakScale_M1 --test_data_name 200115_LeakScale_M1  gpuhome Acc@1 24.410 Acc@5 65.440
+
+CUDA_VISIBLE_DEVICES=0 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M2 --data_dir ~/water/200115_LeakScale_M2 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M2 --test_data_dir  ~/water/200115_LeakScale_M3 --test_data_name 200115_LeakScale_M3  gpuhome Acc@1 65.410 Acc@5 93.620
+
+CUDA_VISIBLE_DEVICES=0 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M2 --data_dir ~/water/200115_LeakScale_M2 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M2 --test_data_dir  ~/water/200115_LeakScale_M4 --test_data_name 200115_LeakScale_M4  gpuhome Acc@1 73.910 Acc@5 97.180
+
+CUDA_VISIBLE_DEVICES=1 ~/miniconda2/envs/py27/bin/python  train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M2 --data_dir ~/water/200115_LeakScale_M2 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M2 --test_data_dir  ~/water/200115_LeakScale_M5 --test_data_name 200115_LeakScale_M5  gpuhome Acc@1 74.380 Acc@5 97.260
+
+CUDA_VISIBLE_DEVICES=1 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M2 --data_dir ~/water/200115_LeakScale_M2 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M2 --test_data_dir  ~/water/200115_LeakScale_M6 --test_data_name 200115_LeakScale_M6  gpuhome Acc@1 72.500 Acc@5 95.890
+
+===========================================200115_LeakScale_M3===========================================
+CUDA_VISIBLE_DEVICES=2 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M3 --data_dir ~/water/200115_LeakScale_M3 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M3  gpuhome Acc@1 77.780 Acc@5 98.430
+
+CUDA_VISIBLE_DEVICES=2 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M3 --data_dir ~/water/200115_LeakScale_M3 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M3  --test_data_dir  ~/water/200115_LeakScale_M1 --test_data_name 200115_LeakScale_M1  gpuhome  Acc@1 12.750 Acc@5 56.950
+
+CUDA_VISIBLE_DEVICES=3 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M3 --data_dir ~/water/200115_LeakScale_M3 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M3  --test_data_dir  ~/water/200115_LeakScale_M2 --test_data_name 200115_LeakScale_M2  gpuhome Acc@1 55.220 Acc@5 89.290
+
+CUDA_VISIBLE_DEVICES=3 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M3 --data_dir ~/water/200115_LeakScale_M3 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M3  --test_data_dir  ~/water/200115_LeakScale_M4 --test_data_name 200115_LeakScale_M4  gpuhome  Acc@1 84.240 Acc@5 99.090
+
+CUDA_VISIBLE_DEVICES=2 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M3 --data_dir ~/water/200115_LeakScale_M3 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M3  --test_data_dir  ~/water/200115_LeakScale_M5 --test_data_name 200115_LeakScale_M5  gpuhome Acc@1 84.380 Acc@5 99.090
+
+CUDA_VISIBLE_DEVICES=3 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M3 --data_dir ~/water/200115_LeakScale_M3 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M3  --test_data_dir  ~/water/200115_LeakScale_M6 --test_data_name 200115_LeakScale_M6  gpuhome  Acc@1 83.020 Acc@5 98.590
+
+===========================================200115_LeakScale_M4===========================================
+CUDA_VISIBLE_DEVICES=3 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M4 --data_dir ~/water/200115_LeakScale_M4 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M4 gpuhome Acc@1 84.920 Acc@5 99.100
+
+CUDA_VISIBLE_DEVICES=2 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M4 --data_dir ~/water/200115_LeakScale_M4 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M4 --test_data_dir  ~/water/200115_LeakScale_M1 --test_data_name 200115_LeakScale_M1  gpuhome  Acc@1 10.110 Acc@5 52.810
+
+CUDA_VISIBLE_DEVICES=1 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M4 --data_dir ~/water/200115_LeakScale_M4 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M4 --test_data_dir  ~/water/200115_LeakScale_M2 --test_data_name 200115_LeakScale_M2  gpuhome  Acc@1 34.700 Acc@5 76.720
+
+CUDA_VISIBLE_DEVICES=1 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M4 --data_dir ~/water/200115_LeakScale_M4 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M4 --test_data_dir  ~/water/200115_LeakScale_M3 --test_data_name 200115_LeakScale_M3  gpuhome  Acc@1 74.450 Acc@5 96.690
+
+CUDA_VISIBLE_DEVICES=1 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M4 --data_dir ~/water/200115_LeakScale_M4 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M4 --test_data_dir  ~/water/200115_LeakScale_M5 --test_data_name 200115_LeakScale_M5  gpuhome  Acc@1 88.330 Acc@5 99.380
+
+CUDA_VISIBLE_DEVICES=2 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M4 --data_dir ~/water/200115_LeakScale_M4 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M4 --test_data_dir  ~/water/200115_LeakScale_M6 --test_data_name 200115_LeakScale_M6  gpuhome Acc@1 88.040 Acc@5 99.520
+
+===========================================200115_LeakScale_M5===========================================
+CUDA_VISIBLE_DEVICES=0 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M5 --data_dir ~/water/200115_LeakScale_M5 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M5 gpuhome Acc@1 88.970 Acc@5 99.490
+
+CUDA_VISIBLE_DEVICES=0 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M5 --data_dir ~/water/200115_LeakScale_M5 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M5 --test_data_dir  ~/water/200115_LeakScale_M1 --test_data_name 200115_LeakScale_M1  gpuhome  Acc@1 8.160 Acc@5 46.150
+
+CUDA_VISIBLE_DEVICES=1 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M5 --data_dir ~/water/200115_LeakScale_M5 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M5 --test_data_dir  ~/water/200115_LeakScale_M2 --test_data_name 200115_LeakScale_M2  gpuhome  Acc@1 17.680 Acc@5 67.320
+
+CUDA_VISIBLE_DEVICES=1 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M5 --data_dir ~/water/200115_LeakScale_M5 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M5 --test_data_dir  ~/water/200115_LeakScale_M3 --test_data_name 200115_LeakScale_M3  gpuhome Acc@1 61.300 Acc@5 91.070
+
+CUDA_VISIBLE_DEVICES=2 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M5 --data_dir ~/water/200115_LeakScale_M5 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M5 --test_data_dir  ~/water/200115_LeakScale_M4 --test_data_name 200115_LeakScale_M4  gpuhome Acc@1 82.520 Acc@5 98.460
+
+CUDA_VISIBLE_DEVICES=2 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M5 --data_dir ~/water/200115_LeakScale_M5 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M5 --test_data_dir  ~/water/200115_LeakScale_M6 --test_data_name 200115_LeakScale_M6  gpuhome Acc@1 89.400 Acc@5 99.670
+
+
+===========================================200115_LeakScale_M6===========================================
+CUDA_VISIBLE_DEVICES=3 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M6 --data_dir ~/water/200115_LeakScale_M6 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M6 gpuhome Acc@1 90.450 Acc@5 99.670
+
+CUDA_VISIBLE_DEVICES=3 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M6 --data_dir ~/water/200115_LeakScale_M6 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M6 --test_data_dir  ~/water/200115_LeakScale_M1 --test_data_name 200115_LeakScale_M1  gpuhome  Acc@1 8.120 Acc@5 47.960
+
+CUDA_VISIBLE_DEVICES=0 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M6 --data_dir ~/water/200115_LeakScale_M6 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M6 --test_data_dir  ~/water/200115_LeakScale_M2 --test_data_name 200115_LeakScale_M2  gpuhome  Acc@1 12.600 Acc@5 62.860
+
+CUDA_VISIBLE_DEVICES=3 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M6 --data_dir ~/water/200115_LeakScale_M6 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M6 --test_data_dir  ~/water/200115_LeakScale_M3 --test_data_name 200115_LeakScale_M3  gpuhome  Acc@1 50.720 Acc@5 88.800
+
+CUDA_VISIBLE_DEVICES=1 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M6 --data_dir ~/water/200115_LeakScale_M6 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M6 --test_data_dir  ~/water/200115_LeakScale_M4 --test_data_name 200115_LeakScale_M4  gpuhome Acc@1 76.030 Acc@5 96.690
+
+CUDA_VISIBLE_DEVICES=2 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M6 --data_dir ~/water/200115_LeakScale_M6 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M6 --test_data_dir  ~/water/200115_LeakScale_M5 --test_data_name 200115_LeakScale_M5  gpuhome Acc@1 86.990 Acc@5 99.080
+
+
+######################################################################################################################
+===========================================191220_MultipleLeaks===========================================
+CUDA_VISIBLE_DEVICES=3 python train.py main --arch waterdsnetf --multi_label 3 --lr 0.6 --epoch 120 --kind 191220_MultipleLeaks --data_dir ~/water/191220_MultipleLeaks --save_path '~/waterLZY/modelparams' --out 191220_MultipleLeaks   host144  
+
+
+
+######################################################################################################################
+===========================================200115_LeakScale_M6    change number of samples   ===========================================
+CUDA_VISIBLE_DEVICES=0 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M6 --num_of_samples 2500 --data_dir ~/water/200115_LeakScale_M6 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M6    Acc@1 10.910 Acc@5 45.000     
+
+CUDA_VISIBLE_DEVICES=1 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M6 --num_of_samples 5000 --data_dir ~/water/200115_LeakScale_M6 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M6   Acc@1 13.060 Acc@5 49.090
+
+CUDA_VISIBLE_DEVICES=2 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M6 --num_of_samples 10000 --data_dir ~/water/200115_LeakScale_M6 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M6   Acc@1 27.080 Acc@5 80.700 
+
+CUDA_VISIBLE_DEVICES=2 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M6 --num_of_samples 15000 --data_dir ~/water/200115_LeakScale_M6 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M6
+
+CUDA_VISIBLE_DEVICES=3 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M6 --num_of_samples 20000 --data_dir ~/water/200115_LeakScale_M6 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M6  Acc@1 86.290 Acc@5 99.420
+
+
+######################################################################################################################
+===========================================200115_LeakScale_M6    record acc 2 3 4  ===========================================
+CUDA_VISIBLE_DEVICES=3 ~/miniconda2/envs/py27/bin/python train.py main --arch waterdsnetf --lr 0.6 --epoch 120 --kind 200115_LeakScale_M6_acc12345 --data_dir ~/water/200115_LeakScale_M6 --save_path '~/waterLZY/modelparams' --out 200115_LeakScale_M6_acc12345 Acc@1 90.450 Acc@5 99.670
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
